@@ -1,0 +1,4 @@
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/Users/xiangluo/Documents/GitHub/Scala_Spark_DataFrame/"), "scala_spark_dataframe")...
+[debug] Done updating ProjectRef(uri("file:/Users/xiangluo/Documents/GitHub/Scala_Spark_DataFrame/"), "scala_spark_dataframe")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
