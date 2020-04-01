@@ -1,17 +1,11 @@
 package classes
 
-import org.apache.spark.sql.SparkSession
-
+import com.company.Framework.scalaclasses.Frame
+import com.company.Framework.scalaclasses.RDDFrame
 object Example extends App{
-  val spark = SparkSession
-    .builder()
-    .master("local")
-    .appName("SparkExample")
-    .config("spark.some.config.option", "some-value")
-    .getOrCreate()
+//  val df = new Frame().getData()
+//  df.show()
+//  val rdd = new RDDFrame().getRDD()
+//  rdd.take(10).foreach()
 
-
-    
-
-    spark.stop()
 }
