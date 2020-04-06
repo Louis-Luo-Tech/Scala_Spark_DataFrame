@@ -3,7 +3,6 @@ package classes
 import com.company.Framework.scalaclasses.Frame
 import com.company.Framework.scalaclasses.RDDFrame
 import org.apache.spark.sql.types._
-import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{ColumnName,DataFrame,SparkSession}
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions._
@@ -19,16 +18,19 @@ object Example extends App{
   val spark = SparkSession.builder().master("local[*]").appName("SparkExample").config("spark.driver.allowMultipleContexts","true").getOrCreate()
   import spark.implicits._
   val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
+  df.show()
   val zip = udf((xs: Seq[String], ys: Seq[String]) => xs.zip(ys))
 //val df1 = df.withColumn("new",explode(split(zip(col("name"), col("code")),"\\|")))
   val df_null = df.filter(col("name").isNull || col("code").isNull)
     .withColumnRenamed("name","newname")
     .withColumnRenamed("code","newcode")
+  df_null.show()
   //df_null.show()
   val df_not_null = df.filter(col("name").isNotNull && col("code").isNotNull)
   //df_not_null.show()
+  df_not_null.show()
   val df1 = df_not_null.withColumn("newname",split(col("name"), "\\|")).drop("name").withColumn("newcode",split(col("code"), "\\|")).drop("code")
-  //df1.show()
+  df1.show()
 
   val df2 = df1.withColumn("vars", explode(zip(col("newname"), col("newcode"))))
 
@@ -40,5 +42,5 @@ object Example extends App{
   //df3.show()
   df4.show()
   //df_null.union(df2).show()
-
+  Thread.sleep(1000000)
 }
