@@ -44,5 +44,5 @@ object Example extends App{
       .filter(col("new_name") =!= "")
   df3.show()
 //  df_null.union(df2).show()
-  Thread.sleep(1000000)
+  Thread.sleep(1000000)  
 }
