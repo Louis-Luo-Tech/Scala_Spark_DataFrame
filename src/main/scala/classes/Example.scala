@@ -9,16 +9,16 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.StringType
 
 object Example extends App{
-  val df = new Frame().getData()
-  val column_name = Seq("ee","rr","id")
-  val df1 = df.select(column_name.map(c => col(c)): _*)
-    df1.show()
-//  val rdd = new RDDFrame().getRDD()
-//  rdd.take(10).foreach()
-//  val spark = SparkSession.builder().master("local[*]").appName("SparkExample").config("spark.driver.allowMultipleContexts","true").getOrCreate()
-//  import spark.implicits._
-//  val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
-//  df.show()
+//  val df = new Frame().getData()
+//  val column_name = Seq("ee","rr","id")
+//  val df1 = df.select(column_name.map(c => col(c)): _*)
+//    df1.show()
+  val rdd = new RDDFrame().getRDD()
+  rdd.take(10)
+  val spark = SparkSession.builder().master("local[*]").appName("SparkExample").config("spark.driver.allowMultipleContexts","true").getOrCreate()
+  import spark.implicits._
+  val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
+  df.show()
 //  val zip = udf((xs: Seq[String], ys: Seq[String]) => xs.zip(ys))
 //
 //
