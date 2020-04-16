@@ -20,16 +20,18 @@ object Example extends App{
   val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
   df.show()
   val zip = udf((xs: Seq[String], ys: Seq[String]) => xs.zip(ys))
-//val df1 = df.withColumn("new",explode(split(zip(col("name"), col("code")),"\\|")))
-//val df_null = df.filter(col("name").isNull || col("code").isNull)
-//  .withColumn("len",when(size(split(col("name"),"\\|")) >=1,lit(size(split(col("name"),"\\|")))))
-
-//  val df_null = df.filter(col("name").isNull || col("code").isNull)
-//      .withColumn("newname",split(col("name"),"\\|"))
-//      .withColumn("code",split(col("code"),"\\|")(0))
 
 
-//    df_null.show()
+  val df1 = df.withColumn("new",explode(split(zip(col("name"), col("code")),"\\|")))
+val df_null = df.filter(col("name").isNull || col("code").isNull)
+  .withColumn("len",when(size(split(col("name"),"\\|")) >=1,lit(size(split(col("name"),"\\|")))))
+
+  val df_null = df.filter(col("name").isNull || col("code").isNull)
+      .withColumn("newname",split(col("name"),"\\|"))
+      .withColumn("code",split(col("code"),"\\|")(0))
+
+
+    df_null.show()
 
 
   val df_not_null = df.filter(col("name").isNotNull && col("code").isNotNull)
@@ -44,5 +46,5 @@ object Example extends App{
       .filter(col("new_name") =!= "")
   df3.show()
 //  df_null.union(df2).show()
-  Thread.sleep(1000000)  
+  Thread.sleep(1000000)
 }
