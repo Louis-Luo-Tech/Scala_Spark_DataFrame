@@ -19,3 +19,11 @@ libraryDependencies ++= Seq(
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.19"
 
 libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion % "provided"
+
+libraryDependencies += "org.apache.flink" %% "flink-scala" % "1.10.0"
+
+libraryDependencies += "org.apache.flink" % "flink-core" % "1.10.0"
+
+libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.10.0" % "provided"
+
+libraryDependencies += "org.apache.flink" % "flink-table" % "1.10.0" % "provided" pomOnly()
