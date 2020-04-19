@@ -15,10 +15,10 @@ object Example extends App{
 //    df1.show()
 //  val rdd = new RDDFrame().getRDD()
 //  rdd.take(10)
-  val spark = SparkSession.builder().master("local[*]").appName("SparkExample").config("spark.driver.allowMultipleContexts","true").getOrCreate()
-  import spark.implicits._
-  val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
-  df.show()
+//  val spark = SparkSession.builder().master("local[*]").appName("SparkExample").config("spark.driver.allowMultipleContexts","true").getOrCreate()
+//  import spark.implicits._
+//  val df = spark.read.format("csv").option("header", "true").load("/Users/xiangluo/Desktop/data/test.csv")
+//  df.show()
 //  val zip = udf((xs: Seq[String], ys: Seq[String]) => xs.zip(ys))
 //
 //
