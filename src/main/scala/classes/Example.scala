@@ -9,7 +9,8 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.StringType
 
 object Example extends App{
-//  val df = new Frame().getData()
+  val df = new Frame().getData()
+
 //  val column_name = Seq("ee","rr","id")
 //  val df1 = df.select(column_name.map(c => col(c)): _*)
 //    df1.show()

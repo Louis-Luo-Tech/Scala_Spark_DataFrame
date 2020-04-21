@@ -20,7 +20,7 @@ class Frame {
   val pass = "12345678"
   val sourcetable1 = "facts"
   val sourcetable2 = "cities"
-  def getData(): DataFrame ={
+  def getData(): Option[DataFrame] ={
     // JDBC Connection and load table in Dataframe
     val facts = spark.read.format("jdbc")
       .option("driver", driver)
