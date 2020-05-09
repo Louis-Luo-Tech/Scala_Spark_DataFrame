@@ -43,14 +43,15 @@ object DataFrameAPIApp {
 //
 //    val count = zips.count()
 //    println(s"Total Count: $count") //wc -l zips.json
-
+      zips.filter("pop > 4000").show(10)
+      zips.filter($"pop" > 4000).show()
 //    zips.filter(zips.col("pop") > 40000).show(10)
 //    zips.filter(col("pop") > 40000).show(10)  //import org.apache.spark.sql.functions._
 //    zips.filter(zips.col("pop") > 40000).withColumnRenamed("_id","new_id").show(10)
-    zips.select("_id","city","pop","state").filter(col("state") === "CA").orderBy(desc("pop")).show(10,false) // desc import org.apache.spark.sql.functions._
-
-    zips.createOrReplaceTempView("zips")
-    spark.sql("select _id,city,pop,state from zips order by pop desc limit 10").show(10,false)
+//    zips.select("_id","city","pop","state").filter(col("state") === "CA").orderBy(desc("pop")).show(10,false) // desc import org.apache.spark.sql.functions._
+//
+//    zips.createOrReplaceTempView("zips")
+//    spark.sql("select _id,city,pop,state from zips order by pop desc limit 10").show(10,false)
 
     spark.close()
 

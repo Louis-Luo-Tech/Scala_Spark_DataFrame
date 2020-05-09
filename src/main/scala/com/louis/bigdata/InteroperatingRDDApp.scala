@@ -20,6 +20,7 @@ object InteroperatingRDDApp {
    */
 
   def runProgrammaticSchema (spark: SparkSession): Unit ={
+    // This import is needed to use the $-notation
     import spark.implicits._
     val peopleRDD: RDD[String] = spark.sparkContext.textFile("file:///Users/xiangluo/Documents/GitHub/Scala_Spark_DataFrame/input/people.txt")
     //Step1
@@ -30,6 +31,7 @@ object InteroperatingRDDApp {
          StructType(
              StructField("name", StringType, true) ::
                StructField("age", IntegerType, false) :: Nil)
+    //Step3
     val peopleDF: DataFrame = spark.createDataFrame(peopleRowRDD, struct)
     peopleDF.show(false)
 
