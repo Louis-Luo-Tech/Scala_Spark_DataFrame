@@ -27,3 +27,5 @@ libraryDependencies += "org.apache.flink" % "flink-core" % "1.10.0"
 libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.10.0" % "provided"
 
 libraryDependencies += "org.apache.flink" % "flink-table" % "1.10.0" % "provided" pomOnly()
+
+libraryDependencies += "com.typesafe" % "config" % "1.3.3"

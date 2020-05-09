@@ -1,5 +1,8 @@
 package com.louis.bigdata
 
+import java.util.Properties
+
+import com.typesafe.config.ConfigFactory
 import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 
 object DataSourceApp {
@@ -13,8 +16,34 @@ object DataSourceApp {
 //    common(spark)
 //    parquet(spark)
 //    convert(spark)
-    jdbc(spark)
+//    jdbc(spark)
+    jdbc2(spark)
     spark.stop()
+  }
+
+  def jdbc2(spark: SparkSession): Unit ={
+      import spark.implicits._
+      val config = ConfigFactory.load()
+      val driver = config.getString("db.default.driver")
+      val url = config.getString("db.default.url")
+      val user = config.getString("db.default.user")
+      val pass = config.getString("db.default.pass")
+      val sourcetable1 = config.getString("db.default.sourcetable1")
+      val targettable1 = config.getString("db.default.targettable1")
+      val sourcetable2 = config.getString("db.default.sourcetable2")
+      val targettable2 = config.getString("db.default.targettable2")
+
+
+      val jdbcDF1 = spark.read
+        .format("jdbc")
+        .option("driver",driver)
+        .option("url", url)
+        .option("dbtable", sourcetable1)
+        .option("user", user)
+        .option("password", pass)
+        .load()
+      jdbcDF1.show(false)
+
   }
 
   /**
@@ -31,8 +60,10 @@ object DataSourceApp {
     val user = "root"
     val pass = "12345678"
     val sourcetable1 = "data.facts"
+    val targettable1 = "data.facts1"
     val sourcetable2 = "data.cities"
-    val jdbcDF = spark.read
+    val targettable2 = "data.cities1"
+    val jdbcDF1 = spark.read
       .format("jdbc")
       .option("driver",driver)
       .option("url", url)
@@ -40,8 +71,24 @@ object DataSourceApp {
       .option("user", user)
       .option("password", pass)
       .load()
-    jdbcDF.show(false)
+//    jdbcDF1.show(false)
 
+    jdbcDF1.filter("population > 3000000").write
+      .format("jdbc")
+      .option("url", url)
+      .option("dbtable", targettable1)
+      .option("user", user)
+      .option("password", pass)
+      .save()
+
+    val connectionProperties = new Properties()
+    connectionProperties.put("user", user)
+    connectionProperties.put("password", pass)
+    val jdbcDF2 = spark.read
+      .jdbc(url, sourcetable2, connectionProperties)
+//    jdbcDF2.show(false)
+    jdbcDF2.filter("capital = true").write
+      .jdbc(url,targettable2,connectionProperties)
   }
 
   /**
