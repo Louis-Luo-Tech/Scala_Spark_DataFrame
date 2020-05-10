@@ -16,7 +16,7 @@ libraryDependencies ++= Seq(
 //  "mysql" % "mysql-connector-java" % "5.1.6"
 )
 
-libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.19"
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.49"
 
 libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % sparkVersion % "provided"
 
@@ -29,3 +29,7 @@ libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.10.0" 
 libraryDependencies += "org.apache.flink" % "flink-table" % "1.10.0" % "provided" pomOnly()
 
 libraryDependencies += "com.typesafe" % "config" % "1.3.3"
+
+libraryDependencies += "org.apache.hive" % "hive-jdbc" % "1.2.1"
+
+libraryDependencies += "org.apache.spark" %% "spark-hive-thriftserver" % "2.4.5" % "provided"

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Scala_Spark_DataFrame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Scala_Spark_DataFrame_jar</output-path>
+    <root id="archive" name="Scala_Spark_DataFrame.jar">
+      <element id="module-output" name="Scala_Spark_DataFrame" />
+    </root>
+  </artifact>
+</component>
